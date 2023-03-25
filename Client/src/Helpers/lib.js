@@ -99,6 +99,11 @@ function debounce(func, delay = 1000) {
     }
 }
 
+function removeOutdatedTasks() {
+    const outdatedTasks = [...document.querySelectorAll('.task.active')]
+    outdatedTasks.forEach(tag => tag.remove())
+}
+
 function isValid(container = document) {
     return container.querySelectorAll('.incorrect').length == 0
 }
@@ -115,5 +120,6 @@ export {
     disableInputingAndReadContent,
     enableInputs,
     isValid,
-    defaultObject
+    defaultObject,
+    removeOutdatedTasks
 }

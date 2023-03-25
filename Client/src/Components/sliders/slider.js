@@ -1,6 +1,6 @@
 'use strict'
 import { lengthDaysMonths, days } from '../../data/constants.js'
-import { publishCurrentDate, debounce } from '../../Helpers/lib.js'
+import { publishCurrentDate, debounce, removeOutdatedTasks } from '../../Helpers/lib.js'
 import { getTasks } from '../../main.js'
 
 let currentDate = new Date().getDate()
@@ -18,8 +18,7 @@ const debounceGetTasks = debounce(() => getTasks(currentDate, currentMonth, curr
 
 function slide(leftOrRight) {
     leftOrRight ? showDates(1) : showDates(-1)
-    const outdatedTasks = [...document.querySelectorAll('.task.active')]
-    outdatedTasks.forEach(tag => tag.remove())
+    removeOutdatedTasks()
     debounceGetTasks()
 }
 

@@ -4,8 +4,6 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
     const { search_query, sort_query } = req.query
-    console.log(sort_query)
-    console.log()
     const regexQuery = createQueryRegex(new RegExp(`${search_query}`, 'gim'), ['title', 'time', 'description'])
     try {
         const tasks = await Task.find({ $or: regexQuery })
@@ -14,8 +12,6 @@ router.get('/', async (req, res) => {
         } else {
             res.status(200).json(tasks)
         }
-
-        console.log(await Task.find({ $or: regexQuery }));
     } catch (err) {
         console.log(err)
     }

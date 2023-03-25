@@ -1,5 +1,6 @@
 'use strict'
 import { renderTasks } from './Components/tasks/task.js'
+import { removeOutdatedTasks } from './Helpers/lib.js'
 
 const url = '/tasks/'
 
@@ -34,6 +35,7 @@ async function deleteTasks(ids) {
 async function searchRequest(searchkey = '', sort = '') {
     const res = await fetch(`/results?search_query=${searchkey}&sort_query=${sort}`, { method: 'GET' })
     const tasks = await res.json()
+    removeOutdatedTasks()
     renderTasks(tasks)
     if (!res.ok) {
         //displayErrorMessage
