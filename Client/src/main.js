@@ -32,7 +32,7 @@ async function deleteTasks(ids) {
 }
 
 async function searchRequest(searchkey = '', sort = '') {
-    const res = await fetch(`/results?search_query=${searchkey}?sort_query=${sort}`, { method: 'GET' })
+    const res = await fetch(`/results?search_query=${searchkey}&sort_query=${sort}`, { method: 'GET' })
     const tasks = await res.json()
     renderTasks(tasks)
     if (!res.ok) {
