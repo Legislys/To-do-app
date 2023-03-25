@@ -1,0 +1,521 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: hsl(0, 0%, 10%);
+}
+
+.setting-bar-container {
+    display: flex;
+    position: fixed;
+    top: 3px;
+    flex-direction: column;
+    height: 2rem;
+    width: 2rem;
+    margin: 10px 0 0 10px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header {
+    position: absolute;
+    right: 0;
+    margin-top: 5rem;
+    width: 100vw;
+}
+
+.header-ongoing {
+    width: 100%;
+    color: hsl(0, 0%, 80%);
+    text-align: center;
+}
+
+.header-ongoing span,
+.task .time span input {
+    width: fit-content;
+    height: fit-content;
+    background: linear-gradient(#00F260, #29ffc6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.setting-bar-container svg:hover~div {
+    background-color: hsl(0, 0%, 70%);
+    transition: .5s;
+}
+
+.setting-bar-container svg:hover {
+    fill: hsl(0, 0%, 70%);
+    transition: .5s;
+}
+
+.setting-bar-container svg {
+    fill: hsl(0, 0%, 58%);
+}
+
+.setting-bar-container .bar {
+    width: 2rem;
+    height: 6px;
+    margin: 5px 0 0 0;
+    background-color: hsl(0, 0%, 58%);
+    border-radius: 15px;
+}
+
+.date-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+.date-container .dates-slide .dates-slider-container div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40px;
+    height: 50px;
+    margin: 0 5px;
+    padding: 6px 3px;
+    border-radius: 16px;
+    background: linear-gradient(#00F260, #29ffc6);
+    font-size: 10px;
+    font-family: Garamond;
+    color: white;
+    text-align: center;
+}
+
+.dates-slider-container div:not(.today) {
+    opacity: 0.8;
+    transform: scale(0.8);
+}
+
+.date-container li {
+    list-style: none;
+}
+
+.dates-slide {
+    width: 10rem;
+    height: 4rem;
+    overflow: hidden;
+}
+
+.dates-slider-container {
+    display: flex;
+    width: 10rem;
+    height: 4rem;
+}
+
+.date-container li.slider-left,
+.date-container li.slider-right {
+    width: 15px;
+    height: 15px;
+    background: transparent;
+    fill: hsl(0, 0%, 58%);
+}
+
+
+.date-container li span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.searchbar-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100vw;
+    margin: 1rem 0;
+}
+
+.searchbar-form {
+    display: flex;
+    align-items: center;
+    width: 14rem;
+    background-color: hsl(0, 0%, 20%);
+    border-radius: 25px;
+    padding-right: 10px;
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    max-width: 18rem;
+    width: fit-content;
+    margin-left: 10px;
+    padding: 0.5rem;
+}
+
+.searchbar-input {
+    width: fit-content;
+}
+
+.searchbar svg {
+    width: 1rem;
+    fill: hsl(0, 0%, 90%);
+}
+
+.searchbar .filter {
+    position: relative;
+    fill: hsl(0, 0%, 36%);
+    transition: .5s;
+}
+
+.searchbar .filter:hover {
+    fill: hsl(0, 0%, 70%);
+}
+
+.filter-sort-container {
+    display: flex;
+    position: absolute;
+    top: -60px;
+    right: -170px;
+    width: fit-content;
+    height: fit-content;
+    background-color: hsl(0, 0%, 20%);
+    border-radius: 6px;
+    opacity: 0;
+    transition: .5s;
+}
+
+.filter-sort-container.active {
+    opacity: 1;
+}
+
+.filter-sort-container ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0.5rem;
+}
+
+.filter-sort-container li {
+    display: flex;
+    justify-content: baseline;
+    padding: 5px;
+    color: hsl(0, 0%, 58%);
+    list-style: none;
+}
+
+.filter-sort-title span {
+    font-weight: bold;
+    color: hsl(0, 0%, 70%);
+}
+
+
+.filter-sort-container li input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    margin: 4px 5px 0 0;
+    border-radius: 2px;
+    background-color: hsl(0, 0%, 36%);
+    cursor: pointer;
+    transition: .5s;
+}
+
+.filter-sort-container li svg {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    margin-top: 4px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.filter-sort-container li.active svg,
+.filter-sort-container li.active input:checked {
+    background-color: #00F260;
+    border-radius: 2px;
+    opacity: 1;
+}
+
+.filter-sort-container input:hover {
+    background-color: hsl(0, 0%, 58%);
+}
+
+.filter-sort-container li:not(.filter-sort-title) {
+    cursor: pointer;
+    transition: .5s;
+}
+
+.filter-sort-container li:not(.filter-sort-title) span:hover {
+    color: hsl(0, 0%, 70%);
+}
+
+input {
+    margin: 0 15px;
+    width: 4rem;
+    border: none;
+    background-color: transparent;
+    color: hsl(0, 0%, 90%);
+    outline: none;
+}
+
+.nav-ul-options {
+    display: flex;
+    position: fixed;
+    top: 3px;
+    right: 0;
+    padding: 10px;
+}
+
+.nav-ul-options li {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    padding: 6px 0;
+    transition: .4s;
+    list-style: none;
+}
+
+.nav-ul-options li button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+}
+
+.nav-ul-options li:hover button svg,
+.nav-ul-options li button:hover svg,
+.nav-ul-options li button svg:hover {
+    fill: hsl(0, 0%, 70%);
+}
+
+.nav-ul-options li svg {
+    fill: hsl(0, 0%, 58%);
+    width: 100%;
+    height: 100%;
+}
+
+.nav-ul-options li.bin.active svg {
+    fill: rgb(196, 0, 2);
+}
+
+.nav-ul-options li.edit.active svg {
+    fill: #00F260;
+}
+
+.invalid-popup {
+    display: flex;
+    align-items: center;
+    position: relative;
+    position: absolute;
+    bottom: calc(-100% + 10px);
+    width: 7rem;
+    height: 1rem;
+    border-radius: 10px;
+    background-color: hsl(0, 0%, 20%);
+    color: hsl(0, 0%, 58%);
+    font-size: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: transform .6s, opacity .6s;
+    pointer-events: none;
+}
+
+.invalid-popup svg {
+    height: 80%;
+    width: 0.6rem;
+    margin-left: 10px;
+    padding: 0.2rem 0.2rem 0.2rem 0;
+    fill: rgba(217, 11, 0, 0.85);
+}
+
+.invalid-popup .square-corner {
+    position: absolute;
+    right: 6px;
+    top: -2px;
+    width: 5px;
+    height: 5px;
+    background-color: hsl(0, 0%, 20%);
+    transform: rotate(55deg);
+}
+
+.invalid-popup.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+main {
+    width: 100vw;
+}
+
+.task-container {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 30px;
+
+}
+
+.task {
+    display: flex;
+    position: relative;
+    width: 40%;
+    min-height: 8rem;
+    height: fit-content;
+    margin-top: 20px;
+    padding: 35px 10px 10px 10px;
+    border-radius: 10px;
+    font-family: Garamond;
+    color: hsl(0, 0%, 58%);
+    background-color: hsl(0, 0%, 15%);
+    overflow: hidden;
+    transition: .5s;
+}
+
+.task.active.valid {
+    min-height: fit-content;
+}
+
+.task.active.valid .description {
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.task.active {
+    opacity: 1;
+}
+
+.task.selected {
+    background-color: rgb(235, 17, 17);
+}
+
+.task.selected .title input,
+.task.selected .description,
+.task.selected svg {
+    color: white;
+    fill: white;
+}
+
+.task.selected .dot {
+    background-color: white;
+}
+
+.task.selected .description {
+    background-color: rgb(235, 17, 17);
+}
+
+.task .clock {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    width: 15px;
+    fill: hsl(0, 0%, 70%);
+}
+
+.task .time {
+    position: relative;
+    position: absolute;
+    top: 4px;
+    left: 15px;
+    width: 40px;
+    font-weight: bold;
+    color: hsl(0, 0%, 60%);
+    transition: .4s;
+}
+
+.task .time.active .invalid-popup {
+    top: 40px;
+    width: fit-content;
+    padding-right: 3px;
+    opacity: 1;
+}
+
+.task .time span {
+    display: inline-block;
+}
+
+.task .time input {
+    width: 30px;
+}
+
+.task .title {
+    position: absolute;
+    top: -4px;
+    left: 42%;
+    min-width: 4rem;
+}
+
+.task .title input {
+    width: fit-content;
+    color: hsl(0, 0%, 60%);
+    font-weight: bold;
+}
+
+.task .date {
+    position: absolute;
+    top: 5px;
+    right: -30px;
+    width: fit-content;
+    height: 20px;
+}
+
+.task .description {
+    width: 100%;
+    min-height: 1rem;
+    height: fit-content;
+    margin-top: 10px;
+    padding: 0.2rem 0 5rem 7px;
+    border: 1px solid hsl(0, 0%, 58%);
+    border-radius: 7px;
+    color: hsl(0, 0%, 58%);
+    background-color: hsl(0, 0%, 15%);
+    word-wrap: break-word;
+    word-break: break-all;
+    opacity: 0.8;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+}
+
+.task .description.incorrect,
+.task .title input.incorrect,
+.task .time input.incorrect {
+    color: red;
+}
+
+.dot-container {
+    display: flex;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.dot-container .dot {
+    width: 3px;
+    height: 3px;
+    margin: 0 1px;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 58%);
+    transition: .4s;
+}
+
+.dot-container:hover div {
+    background-color: hsl(0, 0%, 80%);
+}
+
+.task img {
+    fill: hsl(0, 0%, 58%);
+}
+
+section.task-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: fit-content;
+}

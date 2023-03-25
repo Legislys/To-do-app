@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <link rel="stylesheet" href="../src/assets/global.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+    <script type="module" src="../src/Helpers/lib.js" defer></script>
+    <script type="module" src="../src/Helpers/calendar.js" defer></script>
+    <script type="module" src="../src/data/constants.js" defer></script>
+    <script type="module" src="../src/main.js" defer></script>
+    <script type="module" src="../src/Components/todo_options/addTask.js" defer></script>
+    <script type="module" src="../src/Components/todo_options/deleteTask.js" defer></script>
+    <script type="module" src="../src/Components/todo_options/editTask.js" defer></script>
+    <script type="module" src="../src/Components/searchbar/searchbar.js" defer></script>
+    <script type="module" src="../src/Components/filter/filter.js" defer></script>
+    <script type="module" src="../src/Components/sliders/slider.js" defer></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="setting-bar-container">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path
+                    d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+            </svg>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <header>
+            <h2 class="header-ongoing"><span><span>On</span></span>going tasks</h2>
+        </header>
+
+        <ul class="nav-ul-options">
+            <li class="adding">
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                        <path
+                            d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z" />
+                    </svg>
+                </button>
+            </li>
+            <li class="edit">
+                <button>
+                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512.000000pt" height="512.000000pt"
+                        viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+
+                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+                            <path
+                                d="M802 5103 c-18 -9 -43 -30 -55 -47 -21 -29 -22 -43 -25 -243 l-3 -213 -196 0 c-182 0 -198 -1 -234 -22 -25 -14 -46 -37 -59 -63 -20 -41 -20 -62 -20 -2067 0 -1336 3 -2044 10 -2079 25 -129 118 -257 228 -313 116 -59 34 -56 1647 -56 1298 0 1488 2 1540 15 150 39 261 142 318 294 21 55 22 69 25 846 l3 790 -463 -461 c-350 -350 -475 -468 -513 -487 -176 -87 -590 -267 -639 -277 -68 -14 -154 -6 -206 18 -31 15 -105 18 -642 22 -593 5 -607 5 -634 26 -41 30 -64 65 -70 106 -9 53 25 118 75 146 38 22 44 22 526 22 l487 0 -4 24 c-9 44 11 145 41 211 l30 64 -529 3 c-516 3 -529 3 -556 24 -41 30 -64 65 -70 106 -9 53 25 118 75 146 39 22 41 22 627 22 l589 0 45 98 c30 64 61 115 94 149 l49 53 -691 2 c-680 3 -691 3 -718 24 -41 30 -64 65 -70 106 -9 53 25 118 75 146 l39 22 833 0 834 0 150 150 149 150 -991 2 c-984 3 -992 3 -1019 24 -41 30 -64 65 -70 106 -9 53 25 118 75 146 l39 22 1133 0 1134 0 393 393 393 393 -3 419 c-3 399 -4 422 -23 454 -43 72 -54 76 -275 79 l-199 3 -3 202 c-3 181 -5 206 -23 236 -59 100 -189 106 -252 12 -22 -33 -23 -42 -23 -242 l0 -209 -160 0 -160 0 0 201 c0 165 -3 207 -16 235 -52 110 -211 109 -264 -1 -18 -37 -20 -62 -20 -238 l0 -197 -154 0 -155 0 -3 209 c-3 193 -5 212 -24 237 -70 94 -190 96 -251 5 -22 -33 -23 -42 -23 -242 l0 -209 -160 0 -160 0 0 209 c0 200 -1 209 -23 242 -61 91 -181 89 -251 -5 -19 -25 -21 -44 -24 -237 l-3 -209 -155 0 -154 0 0 197 c0 176 -2 201 -20 238 -36 74 -125 104 -198 68z m1368 -1665 c54 -37 74 -72 74 -128 0 -54 -18 -87 -68 -124 -27 -21 -37 -21 -646 -21 -609 0 -619 0 -646 21 -41 30 -64 65 -70 106 -9 52 25 117 73 146 38 21 40 22 644 22 l606 0 33 -22z" />
+                            <path
+                                d="M4539 3717 c-75 -21 -128 -60 -244 -176 l-110 -111 213 -212 212 -213 120 120 c149 148 175 194 174 305 0 61 -5 85 -26 125 -67 128 -211 197 -339 162z" />
+                            <path
+                                d="M3208 2453 l-758 -758 -121 -265 c-67 -146 -125 -278 -130 -294 -16 -55 38 -126 96 -126 8 0 140 57 293 126 l278 125 765 765 764 764 -210 210 c-115 115 -212 210 -215 210 -3 0 -346 -341 -762 -757z" />
+                        </g>
+                    </svg>
+                </button>
+            </li>
+            <li class="bin">
+                <button>
+                    <?xml version="1.0" encoding="iso-8859-1"?>
+                    <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 268.476 268.476"
+                        style="enable-background:new 0 0 268.476 268.476;" xml:space="preserve">
+                        <g id="Delete__x2F__Trash">
+                            <path style="fill-rule:evenodd;  clip-rule:evenodd;" d="M63.119,250.254c0,0,3.999,18.222,24.583,18.222h93.072
+            c20.583,0,24.582-18.222,24.582-18.222l18.374-178.66H44.746L63.119,250.254z M170.035,98.442c0-4.943,4.006-8.949,8.949-8.949
+            c4.943,0,8.95,4.006,8.95,8.949l-8.95,134.238c0,4.943-4.007,8.949-8.949,8.949c-4.942,0-8.949-4.007-8.949-8.949L170.035,98.442z
+             M125.289,98.442c0-4.943,4.007-8.949,8.949-8.949c4.943,0,8.949,4.006,8.949,8.949v134.238c0,4.943-4.006,8.949-8.949,8.949
+            c-4.943,0-8.949-4.007-8.949-8.949V98.442z M89.492,89.492c4.943,0,8.949,4.006,8.949,8.949l8.95,134.238
+            c0,4.943-4.007,8.949-8.95,8.949c-4.942,0-8.949-4.007-8.949-8.949L80.543,98.442C80.543,93.499,84.55,89.492,89.492,89.492z
+             M218.36,35.811h-39.376V17.899C178.984,4.322,174.593,0,161.086,0L107.39,0C95.001,0,89.492,6.001,89.492,17.899v17.913H50.116
+            c-7.914,0-14.319,6.007-14.319,13.43c0,7.424,6.405,13.431,14.319,13.431H218.36c7.914,0,14.319-6.007,14.319-13.431
+            C232.679,41.819,226.274,35.811,218.36,35.811z M161.086,35.811h-53.695l0.001-17.913h53.695V35.811z" />
+                        </g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                        <g></g>
+                    </svg>
+                </button>
+            </li>
+
+        </ul>
+    </nav>
+    <ul class="date-container">
+        <li class="slider-left"><svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path
+                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
+            </svg>
+        </li>
+        <li class="dates-slide">
+            <div class="slider-wrapper">
+                <div class="dates-slider-container">
+                    <div class="day"></div>
+                    <div class="today"></div>
+                    <template id="today"></template>
+                    <div class="day"></div>
+                </div>
+            </div>
+        </li>
+        <li class="slider-right"><svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path
+                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+            </svg>
+        </li>
+    </ul>
+
+    <div class="searchbar-main-container">
+        <form class="searchbar-form" action="">
+            <label class="searchbar">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path
+                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                </svg>
+                <input class="searchbar-input" type="text" placeholder="Search...">
+                <div class="filter">
+                    <svg class="filter" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                        <path
+                            d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z" />
+                    </svg>
+                    <div class="filter-sort-container">
+                        <ul class="filter-ul">
+                            <li class="filter-sort-title"><span>Filter:</span></li>
+                            <li class="filter-li"><input type="checkbox"> <svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                </svg><span>Latest</span></li>
+                            <li class="filter-li"><input type="checkbox"> <svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                </svg><span>Oldest</span></li>
+                        </ul>
+                        <ul class="sort-ul">
+                            <li class="filter-sort-title"><span>Sort:</span></li>
+                            <li class="sort-li"><input type="checkbox">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                </svg><span>Latest</span>
+                            </li>
+                            <li class="sort-li"><input type="checkbox"> <svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                </svg><span>Oldest</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </label>
+        </form>
+        <div class="invalid-popup">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path
+                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z" />
+            </svg>
+            Please fill in form
+            <div class="square-corner"></div>
+        </div>
+
+    </div>
+
+    <main>
+        <section class="task-container">
+            <template id="task">
+                <div class="task">
+                    <svg class="clock" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                        <path
+                            d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z" />
+                    </svg>
+                    <span class="time">
+                        <span>
+                            <input type="text" placeholder="Time">
+                            <div class="invalid-popup">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z" />
+                                </svg>
+                                Invalid time
+                                <div class="square-corner"></div>
+                            </div>
+                        </span>
+                    </span>
+                    <h2 class="title">
+                        <input type="text" placeholder="Task title">
+                    </h2>
+                    <input class="date" readonly>
+                    <textarea class="description" type="text" placeholder="Description" spellcheck="false"></textarea>
+                    <div class="dot-container">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </template>
+        </section>
+    </main>
+
+</body>
+
+</html>
