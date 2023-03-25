@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
-mongoose.connect('mongodb://127.0.0.1/tasksdb').then(() => console.log('Success')).catch((err) => console.log(err))
+import * as dotenv from 'dotenv'
+dotenv.config()
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true }).then(() => console.log('Success')).catch((err) => console.log(err))
 
 const taskSchema = mongoose.Schema({
     day: String,
