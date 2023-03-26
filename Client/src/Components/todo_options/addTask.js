@@ -1,5 +1,5 @@
 'use strict'
-import { appendTask, isFormValid, disableInputingAndReadContent, getFullCurrentDate, dateFormatter, isDayInPast } from '../../Helpers/lib.js'
+import { appendTask, isFormValid, disableInputingAndReadContent, getFullCurrentDate, dateFormatter, isDayInPast, paramDeformatter, compareParams, areTasksInSameDay } from '../../Helpers/lib.js'
 import { submitNewForm } from '../../main.js'
 
 document.querySelector('.adding').addEventListener('click', () => {
@@ -18,42 +18,21 @@ document.querySelector('.adding').addEventListener('click', () => {
 
             task.querySelector('.date').value = dateFormatter(day, month, year)
             task.classList.add('valid')
-            // sortBy('time')
             submitNewForm({ time, title, description, day, month, year }, task)
+            // sortBy('time')
         }
     })
 })
 
 
-function sorting(tasks, stringDivisor, reverse) {
+function sorting(tasks, AreInSameDay = areTasksInSameDay(a, b)) {
     const taskContainer = document.querySelector('.task-container')
     tasks.sort((a, b) => {
-        let aParam, bParam
-        if (reverse) {
-            aParam = Number(a.value.split(stringDivisor, '').reverse())
-            bParam = Number(b.value.split(stringDivisor, '').reverse())
-            aParam.some((val, i) => val > bParam[i]) ? 1 : -1
-            return 0
-        } else {
-            aParam = Number(a.value.replace(stringDivisor, ''))
-            bParam = Number(b.value.replace(stringDivisor, ''))
-            if (aParam > bParam) return 1
-            if (aParam < bParam) return -1
-            return 0
-        }
+        if (areTasksInSameDay(a, b)) return compareParams(a, b, '.time input', ':')
+        else return compareParams(a, b, '.date', '.', true)
     })
     tasks.forEach(task => taskContainer.appendChild(task.closest('.task')))
 }
 
-function sortBy(parameter) {
-    switch (parameter) {
-        case 'time':
-            sorting([...document.querySelectorAll('.time input')], ':')
-            break
-        case 'date':
-            sorting([...document.querySelectorAll('.date')], '.', true)
-            break
-    }
-}
 
 

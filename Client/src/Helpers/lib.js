@@ -85,10 +85,37 @@ function dateFormatter(date, month, year) {
         .join('.')
 }
 
+function paramDeformatter(element, queryParam, divsor, reverse = false) {
+    if (reverse) return Number(element
+        .querySelector(queryParam)
+        .textContent
+        .split('')
+        .reverse()
+        .join('')
+        .replaceAll(divsor, ''))
+
+    else return Number(element
+        .querySelector(queryParam)
+        .textContent
+        .replaceAll(divsor, ''))
+}
+
+function compareParams(a, b, queryParam, divsor) {
+    const aParam = paramDeformatter(a, queryParam, divsor)
+    const bParam = paramDeformatter(b, queryParam, divsor)
+    if (aParam < bParam) return 1
+    else if (aParam > bParam) return -1
+    else return 0
+}
+
 function isDayInPast() {
     const current = Number(getFullCurrentDate().reverse().join(''))
     const today = Number(`${new Date().getFullYear()}${new Date().getMonth()}${new Date().getDate()}`)
     return current < today
+}
+
+function areTasksInSameDay(a, b) {
+    return a.querySelector('.date').textContent == b.querySelector('.date').textContent
 }
 
 function debounce(func, delay = 1000) {
@@ -120,6 +147,8 @@ export {
     disableInputingAndReadContent,
     enableInputs,
     isValid,
+    areTasksInSameDay,
     defaultObject,
+    compareParams,
     removeOutdatedTasks
 }
