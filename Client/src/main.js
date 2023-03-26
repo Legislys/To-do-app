@@ -1,6 +1,6 @@
 'use strict'
 import { renderTasks } from './Components/tasks/task.js'
-import { removeOutdatedTasks } from './Helpers/lib.js'
+import { removeOutdatedTasks, sortByLatest } from './Helpers/lib.js'
 
 const url = '/tasks/'
 
@@ -8,6 +8,7 @@ async function getTasks(day, month, year) {
     const res = await fetch(`${url}/${day}/${month}/${year}`, { method: 'GET' })
     const tasks = await res.json()
     renderTasks(tasks)
+    sortByLatest(true)
 }
 
 async function submitNewForm(dataForm, task) {
@@ -37,6 +38,7 @@ async function searchRequest(searchkey = '', sort = '') {
     const tasks = await res.json()
     removeOutdatedTasks()
     renderTasks(tasks)
+    sortByLatest()
     if (!res.ok) {
         //displayErrorMessage
     }

@@ -85,27 +85,41 @@ function dateFormatter(date, month, year) {
         .join('.')
 }
 
-function paramDeformatter(element, queryParam, divsor, reverse = false) {
+function paramDeformatter(element, queryParam, divisor, reverse = false) {
     if (reverse) return Number(element
         .querySelector(queryParam)
-        .textContent
-        .split('')
+        .value
+        .split(divisor)
         .reverse()
-        .join('')
-        .replaceAll(divsor, ''))
+        .join(''))
 
     else return Number(element
         .querySelector(queryParam)
-        .textContent
-        .replaceAll(divsor, ''))
+        .value
+        .split(divisor)
+        .join(''))
 }
 
-function compareParams(a, b, queryParam, divsor) {
-    const aParam = paramDeformatter(a, queryParam, divsor)
-    const bParam = paramDeformatter(b, queryParam, divsor)
-    if (aParam < bParam) return 1
-    else if (aParam > bParam) return -1
+function compareParams(a, b, queryParam, divsor, reverse = false) {
+    const aParam = paramDeformatter(a, queryParam, divsor, reverse)
+    const bParam = paramDeformatter(b, queryParam, divsor, reverse)
+    if (aParam < bParam) return -1
+    else if (aParam > bParam) return 1
     else return 0
+}
+
+function sortByLatest(allTasksInSameDay = false, reverse = false) {
+    const tasks = [...document.querySelectorAll('.task.active')]
+    const taskContainer = document.querySelector('.task-container')
+    tasks.sort((a, b) => {
+        if (allTasksInSameDay) return compareParams(a, b, '.time input', ':')
+        else {
+            if (areTasksInSameDay(a, b)) return compareParams(a, b, '.time input', ':')
+            else return compareParams(a, b, '.date', '.', true)
+        }
+    })
+    if (reverse) tasks.reverse()
+    tasks.forEach(task => taskContainer.appendChild(task.closest('.task')))
 }
 
 function isDayInPast() {
@@ -115,7 +129,7 @@ function isDayInPast() {
 }
 
 function areTasksInSameDay(a, b) {
-    return a.querySelector('.date').textContent == b.querySelector('.date').textContent
+    return a.querySelector('.date').value == b.querySelector('.date').value
 }
 
 function debounce(func, delay = 1000) {
@@ -142,6 +156,7 @@ export {
     removeTasksGetTheirIds,
     isFormValid,
     dateFormatter,
+    paramDeformatter,
     isDayInPast,
     debounce,
     disableInputingAndReadContent,
@@ -150,5 +165,6 @@ export {
     areTasksInSameDay,
     defaultObject,
     compareParams,
+    sortByLatest,
     removeOutdatedTasks
 }

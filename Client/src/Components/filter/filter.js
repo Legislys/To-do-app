@@ -1,4 +1,7 @@
 'use strict'
+
+import { sortByLatest } from '../../Helpers/lib.js'
+
 const filter = document.querySelector('.filter')
 filter.addEventListener('click', showFilter)
 
@@ -15,6 +18,16 @@ filterOptions.forEach(option => option.addEventListener('click', showCheck, { ca
 
 function showCheck(e) {
     e.stopPropagation()
-    e.target.closest('li:not(.filter-sort-title)').classList.toggle('active')
+    const closestOption = e.target.closest('li:not(.filter-sort-title)')
+    closestOption.classList.toggle('active')
+    const optionName = closestOption.querySelector('span').textContent
+    switch (optionName) {
+        case 'Latest':
+            sortByLatest()
+            break;
+        case 'Oldest':
+            sortByLatest(false, true)
+            break
+    }
 }
 

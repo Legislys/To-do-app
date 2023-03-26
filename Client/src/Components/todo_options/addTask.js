@@ -1,5 +1,5 @@
 'use strict'
-import { appendTask, isFormValid, disableInputingAndReadContent, getFullCurrentDate, dateFormatter, isDayInPast, paramDeformatter, compareParams, areTasksInSameDay } from '../../Helpers/lib.js'
+import { appendTask, isFormValid, disableInputingAndReadContent, getFullCurrentDate, dateFormatter, isDayInPast, sortByLatest } from '../../Helpers/lib.js'
 import { submitNewForm } from '../../main.js'
 
 document.querySelector('.adding').addEventListener('click', () => {
@@ -19,20 +19,9 @@ document.querySelector('.adding').addEventListener('click', () => {
             task.querySelector('.date').value = dateFormatter(day, month, year)
             task.classList.add('valid')
             submitNewForm({ time, title, description, day, month, year }, task)
-            // sortBy('time')
+            sortByLatest(true)
         }
     })
 })
-
-
-function sorting(tasks, AreInSameDay = areTasksInSameDay(a, b)) {
-    const taskContainer = document.querySelector('.task-container')
-    tasks.sort((a, b) => {
-        if (areTasksInSameDay(a, b)) return compareParams(a, b, '.time input', ':')
-        else return compareParams(a, b, '.date', '.', true)
-    })
-    tasks.forEach(task => taskContainer.appendChild(task.closest('.task')))
-}
-
 
 
